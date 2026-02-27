@@ -1,0 +1,3 @@
+pymem
+pywin32
+requests
