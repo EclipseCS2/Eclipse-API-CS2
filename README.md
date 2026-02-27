@@ -2,58 +2,60 @@
 
 ---
 
-# CS2 Eclipse API Framework 🌑
+# CS2 Eclipse API 🌑
 
-**CS2 Eclipse** — это высокопроизводительный интерфейс для взаимодействия с памятью (External Memory Interface), разработанный для Counter-Strike 2. Фреймворк предоставляет абстракцию над системными вызовами Windows и оффсетами движка Source 2, позволяя разработчикам фокусироваться на логике, а не на поиске адресов.
-
-> **Requirements:** `Pymem`, `pywin32`. Рекомендуется использовать Python 3.10 или выше для оптимальной производительности.
+**CS2 Eclipse** is a high-performance External Memory Interface (EMI) designed for Counter-Strike 2. This framework provides a clean abstraction layer over Source 2 engine offsets, enabling seamless interaction with game memory for research and development purposes.
 
 ---
 
-## 🛠 Архитектура оффсетов
+## 🌑 Installation & Dependencies
 
-API включает в себя полную поддержку актуальных смещений (offsets), разделенных на логические уровни:
+The project relies on low-level libraries to handle process memory and Windows API calls. To set up your environment, ensure you have Python installed and run the following command:
 
-### 1. Global & Engine Offsets
-
-Центральные точки входа в память процесса `client.dll`:
-
-* `dwEntitySystem` / `dwEntityList` — управление реестром объектов.
-* `dwLocalPlayerController` — интерфейс данных игрока.
-* `dwViewMatrix` — данные для World-to-Screen трансформаций.
-
-### 2. Pawn & Stats (Data Members)
-
-Внутренние параметры игровых сущностей:
-
-* **Combat:** `m_iHealth`, `m_ArmorValue`, `m_iShotsFired`, `m_aimPunchAngle`.
-* **Movement:** `m_vecVelocity`, `m_fFlags`, `m_vOldOrigin`.
-* **State:** `m_bIsScoped`, `m_bIsDefusing`, `m_flFlashDuration`.
-
----
-
-## 🛠 Внедрение и использование
-
-Пример инициализации базового модуля для получения состояния здоровья локального игрока:
-
-```python
-# Инициализация через CS2 Eclipse API
-import pymem
-from offsets import * # Импорт ваших сохраненных оффсетов
-
-def get_local_health(pm, client):
-    player = pm.read_longlong(client + dwLocalPlayerPawn)
-    if player:
-        return pm.read_int(player + m_iHealth)
-    return None
+```bash
+python -m pip install -r requirements.txt
 
 ```
 
+> **Core Dependencies:** `Pymem`, `pywin32`.
+
 ---
 
-## ⚠️ Disclaimer & Security
+## 🌑 Technical Specifications (Core Offsets)
 
-**Educational Purpose Only.** Данный инструмент предназначен исключительно для исследовательских целей и изучения архитектуры движка Source 2.
+The API is architected to support all critical memory addresses, categorized by their function within the game engine:
 
-* Разработчик не несет ответственности за любое нарушение правил EULA Valve.
-* Использование на официальных серверах защищенных VAC (Valve Anti-Cheat) крайне не рекомендуется.
+### 1. Global & Engine Access
+
+Primary entry points within `client.dll`:
+
+* **`dwEntitySystem` / `dwEntityList**` — Global entity registry management.
+* **`dwLocalPlayerController`** — Local player metadata and network state.
+* **`dwViewMatrix`** — $4 \times 4$ transformation matrix for World-to-Screen calculations.
+* **`dwGameRules`** — Internal match state and round parameters.
+
+### 2. Player Pawn & Data Members
+
+Specific offsets for real-time entity state monitoring:
+
+* **Combat:** `m_iHealth`, `m_ArmorValue`, `m_iShotsFired`, `m_aimPunchAngle`.
+* **Movement:** `m_vecVelocity`, `m_fFlags`, `m_vOldOrigin`.
+* **Status:** `m_bIsScoped`, `m_bIsDefusing`, `m_flFlashDuration`, `m_lifeState`.
+
+### 3. World & Objects
+
+Environment-specific offsets:
+
+* **C4 Dynamics:** `dwPlantedC4`, `m_flC4Blow`, `m_bBombPlanted`.
+* **Equipment:** `m_pClippingWeapon`, `m_iItemDefinitionIndex`, `m_iClip1`.
+
+---
+
+## ⚠️ Disclaimer
+
+**Educational Purpose Only.** This framework is intended for reverse engineering and software architecture research.
+
+* The developer is not responsible for any account restrictions or bans.
+* Usage on VAC-secured (Valve Anti-Cheat) servers is strictly discouraged.
+
+---
