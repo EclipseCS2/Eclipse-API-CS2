@@ -2,7 +2,7 @@
 
 ---
 
-#ExternalAPI Eclipse 🌑
+# ExternalAPI Eclipse 🌑
 
 **CS2 Eclipse** is a high-performance External Memory Interface (EMI) designed for Counter-Strike 2. This framework provides a clean abstraction layer over Source 2 engine offsets, enabling seamless interaction with game memory for research and development purposes.
 
