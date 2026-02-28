@@ -102,6 +102,7 @@ while True:
 
 ---
 
-## ⚠️ Disclaimer
+> [!CAUTION]
+> ### Disclaimer
+> **Educational Purpose Only.** This framework is intended for reverse engineering and software architecture research. Usage on VAC-secured servers is strictly discouraged. The developer is not responsible for any account restrictions.
 
-**Educational Purpose Only.** This framework is intended for reverse engineering and software architecture research. Usage on VAC-secured servers is strictly discouraged. The developer is not responsible for any account restrictions.
