@@ -2,13 +2,13 @@
 
 ---
 
-# ExternalAPI Eclipse 🌑
+# ExternalAPI Eclipse 💙
 
 **CS2 Eclipse** is a high-performance External Memory Interface (EMI) designed for Counter-Strike 2. This framework provides a clean abstraction layer over Source 2 engine offsets, enabling seamless interaction with game memory for research and development purposes.
 
 ---
 
-## 🌑 Installation & Dependencies
+## 💙 Installation & Dependencies
 
 The project relies on low-level libraries to handle process memory and Windows API calls. To set up your environment, ensure you have Python installed and run the following command:
 
@@ -21,7 +21,7 @@ python -m pip install -r requirements.txt
 
 ---
 
-## 🌑 Technical Specifications (Core Offsets)
+## 💙 Technical Specifications (Core Offsets)
 
 The API is architected to support all critical memory addresses, categorized by their function within the game engine:
 
@@ -59,3 +59,4 @@ Environment-specific offsets:
 * Usage on VAC-secured (Valve Anti-Cheat) servers is strictly discouraged.
 
 ---
+
